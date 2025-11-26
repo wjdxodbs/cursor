@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fresh Fruits - 신선한 과일을 매일 배송합니다</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: #333;
+      }
+
+      /* 네비게이션 */
+      nav {
+        background: transparent;
+        color: white;
+        padding: 1rem 0;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      nav.scrolled,
+      nav:hover {
+        background: #2c3e50;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      nav .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      nav .logo {
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+
+      nav ul {
+        display: flex;
+        list-style: none;
+        gap: 2rem;
+      }
+
+      nav a {
+        color: white;
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+
+      nav a:hover {
+        color: #3498db;
+      }
+
+      /* 섹션 공통 스타일 */
+      section {
+        padding: 80px 20px;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      h2 {
+        text-align: center;
+        font-size: 2.5rem;
+        margin-bottom: 3rem;
+        color: #2c3e50;
+      }
+
+      /* Hero 섹션 */
+      #hero {
+        background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+          url("https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxODA4MDdfMjgy%2FMDAxNTMzNjA2NDI2NDAz.RkdCApNM_M4oQCxuG8HwHoeFmbi79fl2RJwDzILvBr0g.147AZbN6YoBmtRXNXi6ZNobGQFkwfZvesDK2gMmLJmQg.JPEG.hilonko%2FIMG_4521.JPG&type=sc960_832");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        color: white;
+        text-align: center;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      #hero h1 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+        opacity: 0;
+        animation: fadeInUp 1s ease-out forwards;
+        animation-delay: 0.3s;
+      }
+
+      #hero p {
+        font-size: 1.3rem;
+        margin-bottom: 2rem;
+        text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.7);
+        opacity: 0;
+        animation: fadeInUp 1s ease-out forwards;
+        animation-delay: 0.8s;
+      }
+
+      .btn {
+        display: inline-block;
+        background: white;
+        color: #667eea;
+        padding: 12px 30px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: transform 0.3s, box-shadow 0.3s;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+        opacity: 0;
+        animation: fadeInUp 1s ease-out forwards;
+        animation-delay: 1.3s;
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+      }
+
+      /* 애니메이션 키프레임 */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* About 섹션 */
+      #about {
+        background: #f8f9fa;
+      }
+
+      .about-content {
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .about-content p {
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+        line-height: 1.8;
+      }
+
+      /* Services 섹션 */
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+
+      .service-card {
+        background: white;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s;
+        text-align: center;
+      }
+
+      .service-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .service-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+      }
+
+      .service-card h3 {
+        color: #2c3e50;
+        margin-bottom: 1rem;
+      }
+
+      /* Team 섹션 */
+      #team {
+        background: #f8f9fa;
+      }
+
+      .team-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+
+      .team-member {
+        background: white;
+        padding: 2rem;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .team-avatar {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        margin: 0 auto 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 2.5rem;
+        font-weight: bold;
+      }
+
+      .team-member h3 {
+        color: #2c3e50;
+        margin-bottom: 0.5rem;
+      }
+
+      .team-member .role {
+        color: #667eea;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+      }
+
+      /* Contact 섹션 */
+      .contact-content {
+        max-width: 600px;
+        margin: 0 auto;
+        text-align: center;
+      }
+
+      .contact-info {
+        background: white;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .contact-item {
+        margin: 1.5rem 0;
+      }
+
+      .contact-item h3 {
+        color: #2c3e50;
+        margin-bottom: 0.5rem;
+      }
+
+      .contact-item a {
+        color: #667eea;
+        text-decoration: none;
+      }
+
+      /* Footer */
+      footer {
+        background: #2c3e50;
+        color: white;
+        text-align: center;
+        padding: 2rem;
+      }
+
+      /* 반응형 */
+      @media (max-width: 768px) {
+        nav ul {
+          gap: 1rem;
+          font-size: 0.9rem;
+        }
+
+        #hero {
+          background-attachment: scroll;
+          padding: 20px;
+        }
+
+        #hero h1 {
+          font-size: 2rem;
+        }
+
+        #hero p {
+          font-size: 1rem;
+        }
+
+        h2 {
+          font-size: 2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 네비게이션 -->
+    <nav>
+      <div class="container">
+        <div class="logo">🍎 Fresh Fruits</div>
+        <ul>
+          <li><a href="#hero">홈</a></li>
+          <li><a href="#about">소개</a></li>
+          <li><a href="#services">서비스</a></li>
+          <li><a href="#team">팀</a></li>
+          <li><a href="#contact">연락처</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Hero 섹션 -->
+    <section id="hero">
+      <div class="container">
+        <h1>매일 아침 신선한 과일을<br />당신의 식탁으로</h1>
+        <p>농장에서 직접 배송하는 100% 신선한 과일을 만나보세요</p>
+        <a href="#contact" class="btn">주문하기</a>
+      </div>
+    </section>
+
+    <!-- About 섹션 -->
+    <section id="about">
+      <div class="container">
+        <h2>회사 소개</h2>
+        <div class="about-content">
+          <p>
+            Fresh Fruits는 2020년 설립된 프리미엄 과일 판매 전문 기업입니다.
+            국내외 최상급 과일을 엄선하여 고객님의 건강한 식탁을 책임집니다.
+          </p>
+          <p>
+            농장과 직거래를 통해 중간 유통 과정을 최소화하고, 신선도를
+            최우선으로 생각하며 당일 수확 당일 배송을 원칙으로 합니다.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services 섹션 -->
+    <section id="services">
+      <div class="container">
+        <h2>주요 서비스</h2>
+        <div class="services-grid">
+          <div class="service-card">
+            <div class="service-icon">🍎</div>
+            <h3>프리미엄 과일</h3>
+            <p>엄선된 최상급 품질의 국내외 프리미엄 과일을 판매합니다</p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">🚚</div>
+            <h3>당일 배송</h3>
+            <p>신선도 유지를 위한 당일 수확 당일 배송 시스템</p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">📦</div>
+            <h3>정기 구독</h3>
+            <p>매주/매월 정기적으로 신선한 과일 박스를 받아보세요</p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">🎁</div>
+            <h3>선물 세트</h3>
+            <p>특별한 날을 위한 고급 과일 선물 세트 구성 서비스</p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">🌱</div>
+            <h3>유기농 과일</h3>
+            <p>농약 없이 자연 그대로 키운 건강한 유기농 과일</p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">❄️</div>
+            <h3>신선도 보장</h3>
+            <p>콜드체인 시스템으로 배송부터 보관까지 신선도를 보장합니다</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Team 섹션 -->
+    <section id="team">
+      <div class="container">
+        <h2>우리 팀</h2>
+        <div class="team-grid">
+          <div class="team-member">
+            <div class="team-avatar">김</div>
+            <h3>김철수</h3>
+            <p class="role">대표이사</p>
+            <p>20년 과일 유통 전문가</p>
+          </div>
+          <div class="team-member">
+            <div class="team-avatar">이</div>
+            <h3>이영희</h3>
+            <p class="role">품질 관리 이사</p>
+            <p>과일 품질 검수 총괄</p>
+          </div>
+          <div class="team-member">
+            <div class="team-avatar">박</div>
+            <h3>박민수</h3>
+            <p class="role">물류 총괄</p>
+            <p>신선 배송 시스템 관리</p>
+          </div>
+          <div class="team-member">
+            <div class="team-avatar">정</div>
+            <h3>정지훈</h3>
+            <p class="role">고객 서비스 이사</p>
+            <p>고객 만족도 최우선</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact 섹션 -->
+    <section id="contact">
+      <div class="container">
+        <h2>연락처</h2>
+        <div class="contact-content">
+          <div class="contact-info">
+            <div class="contact-item">
+              <h3>📍 주소</h3>
+              <p>서울특별시 강남구 테헤란로 123<br />Fresh Fruits 빌딩 5층</p>
+            </div>
+            <div class="contact-item">
+              <h3>📞 전화</h3>
+              <p><a href="tel:02-1234-5678">02-1234-5678</a></p>
+            </div>
+            <div class="contact-item">
+              <h3>✉️ 이메일</h3>
+              <p>
+                <a href="mailto:order@freshfruits.com">order@freshfruits.com</a>
+              </p>
+            </div>
+            <div class="contact-item">
+              <h3>⏰ 운영시간</h3>
+              <p>평일 09:00 - 18:00<br />(주말 및 공휴일 휴무)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <p>&copy; 2025 Fresh Fruits. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script>
+      // 부드러운 스크롤
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        });
+      });
+
+      // 네비게이션 스크롤 효과
+      const nav = document.querySelector("nav");
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 50) {
+          nav.classList.add("scrolled");
+        } else {
+          nav.classList.remove("scrolled");
+        }
+      });
+    </script>
+  </body>
+</html>
