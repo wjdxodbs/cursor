@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🍎 Fruit Box - 사과 게임</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>🍎 Fruit Box</h1>
+        <div class="game-info">
+          <div class="score-display">
+            <span class="label">점수</span>
+            <span class="value" id="score">0</span>
+          </div>
+          <div class="timer-display">
+            <span class="label">남은 시간</span>
+            <div class="timer-bar-container">
+              <div class="timer-bar" id="timerBar"></div>
+            </div>
+            <span class="value" id="timer">120.0</span>
+          </div>
+          <div class="highscore-display">
+            <span class="label">최고 점수</span>
+            <span class="value" id="highScore">0</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="game-container">
+        <div class="game-board" id="gameBoard">
+          <!-- 13x13 그리드가 여기에 생성됩니다 -->
+          <div class="selection-box" id="selectionBox"></div>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button id="startBtn" class="btn btn-start">게임 시작</button>
+        <button id="resetBtn" class="btn btn-reset" style="display: none">
+          다시 시작
+        </button>
+      </div>
+
+      <div class="instructions">
+        <h3>게임 방법</h3>
+        <ul>
+          <li>🖱️ <strong>드래그</strong>로 사과들을 선택하세요</li>
+          <li>
+            ✅ 선택한 사과의 <strong>합이 10</strong>이 되면 박스가 빨갛게
+            변합니다
+          </li>
+          <li>
+            🎯 드래그를 놓으면 사과가 사라지고 <strong>개당 1점</strong>을 획득!
+          </li>
+          <li>⏰ <strong>2분</strong> 안에 최대한 많은 점수를 획득하세요</li>
+          <li>🏆 이론상 최대 점수: <strong>169점</strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <div id="gameOverModal" class="modal hidden">
+      <div class="modal-content">
+        <h2>게임 종료!</h2>
+        <p class="final-score">최종 점수: <span id="finalScore">0</span>점</p>
+        <p class="time-info" id="timeInfo"></p>
+        <button id="playAgainBtn" class="btn btn-start">다시 하기</button>
+      </div>
+    </div>
+
+    <script src="game.js"></script>
+  </body>
+</html>
