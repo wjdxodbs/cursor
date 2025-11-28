@@ -1,0 +1,59 @@
+# 의존성
+/node_modules
+/.pnp
+.pnp.js
+
+# 테스트
+/coverage
+
+# 프로덕션 빌드
+/build
+
+# 환경 변수
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# 로그 파일
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+
+# 에디터 및 IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# 선택적: 빌드 도구
+.cache
+.parcel-cache
+
+# 선택적: 다음.js
+.next/
+out/
+
+# 선택적: Gatsby
+.cache/
+public
+
+# 선택적: 임시 파일
+*.log
+*.tmp
+*.temp
+
+# OS 관련
+Thumbs.db
+.DS_Store
+
+# 패키지 매니저 락 파일 (선택적으로 포함할 수 있음)
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
+
